@@ -9,7 +9,7 @@ db.init_app(app)
 
 @app.route("/")
 def home():
-    user = db.session.query(User).filter_by(id = session["id"]).first()
+    user = db.session.query(User).filter_by(id = session.get("id")).first()
     return render_template('index.html', user=user, title="Home")
 
 @app.route("/register", methods=['GET', 'POST'])
