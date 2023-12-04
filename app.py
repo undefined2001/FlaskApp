@@ -3,7 +3,7 @@ from models import User, db
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://mysql:root@localhost:3306/flaskapp"
-app.config["SECRET_KEY"] = "KHAIRUL"
+app.config["SECRET_KEY"] = "Asraful"
 
 db.init_app(app)
 
