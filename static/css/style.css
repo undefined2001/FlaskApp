@@ -1,0 +1,8 @@
+.my-font{
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.nav-link:hover{
+    background-color: orange;
+    border-radius: 5px;
+}

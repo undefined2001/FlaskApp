@@ -1,0 +1,8 @@
+1. To install all the required module
+command: pip install -r requirements.txt
+
+2.you must have to change the mysql database URI
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://<username>:<password>@<host>:<port>/<databsename>"
+
+3.Secret key for handling the session
+app.config["SECRET_KEY"] = "<anystring>"

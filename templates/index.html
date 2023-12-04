@@ -1,0 +1,12 @@
+{%extends 'base.html' %}
+{%block title%}{{title}}{%endblock title%}
+
+{%block main%}
+
+{% if user%}
+<h1>Hello {{user.name}} </h1>
+{%else%}
+<h1>You are Not Logged in</h1>
+{%endif%}
+
+{%endblock main%}
