@@ -1,0 +1,28 @@
+{%extends 'admin/admin_base.html'%}
+{%block main%}
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Count</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Modify</th>
+      </tr>
+    </thead>
+    <tbody>
+        {%for user in users%}
+      <tr>
+        <th scope="row">{{loop.index}}</th>
+        <td>{{user.name}}</td>
+        <td>{{user.email}}</td>
+        <td>017xxxxxxxx</td>
+        <td>
+            <!-- <a href="" class="btn btn-sm btn-warning">Update</a> -->
+            <a href="{{url_for('admin_bp.delete_user', user_id=user.id)}}" class="btn btn-sm btn-danger">Delete</a>
+        </td>
+      </tr>
+      {%endfor%}
+    </tbody>
+  </table>
+{%endblock main%}
