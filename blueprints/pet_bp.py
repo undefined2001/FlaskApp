@@ -1,5 +1,5 @@
 from flask import Blueprint, redirect, render_template, url_for, request, session, current_app
-from models import db, User, Pet
+from models import db, User, Pet, Adoption
 import os
 
 pet_bp = Blueprint('pet_bp', __name__, template_folder='templates')
@@ -32,3 +32,29 @@ def see_pets():
     return render_template('pets/see_pets.html', pets=pets)
 
 
+
+@pet_bp.route("/adopt-pet/<int:id>")
+def adopt_pet(id):
+    pet = db.session.query(Pet).filter_by(id=id).first()
+    adopted = db.session.query(Adoption).filter_by(pet_id = pet.id, adopter_id=session.get("id")).first()
+    if session.get("id") == pet.owner_id:
+        return "<h1> You Can't adopt your own pet. </h1>"
+    if not adopted:
+        adoption = Adoption(pet_id = pet.id, owner_id=pet.owner_id, adopter_id=session.get("id"))
+        db.session.add(adoption)
+        db.session.commit()
+    else:
+        return "<h1> You Have Already Requested For this pet. </h1>"
+
+    return redirect(url_for('home'))
+
+@pet_bp.route("/search_pet", methods=["GET", "POST"])
+def search_pet():
+    search_val = None
+    if request.method == "POST":
+        search_val = request.form.get("search_val")
+        if search_val:
+            pets = db.session.query(Pet).filter(Pet.species.ilike(search_val)).all()
+            return render_template("index.html", pets=pets, title="Searched Pet")
+        
+    return redirect(request.url)

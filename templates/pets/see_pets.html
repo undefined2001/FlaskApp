@@ -1,13 +1,13 @@
 {%extends 'base.html'%}
 {%block title%}{{title}}{%endblock title%}
 {%block main%}
-<div class="container">
+<div class="container-fluid d-flex">
     {%for pet in pets%}
-    <div class="card my-3" style="width: 18rem;">
+    <div class="card m-3" style="width: 18rem;">
         <img class="card-img-top" src="{{url_for('static', filename='media/' + pet.image)}}" alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title">Name: {{pet.name}}</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <p class="card-text"> Description: {{pet.description | truncate(150) }}</p>
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">Species: {{pet.species}}</li>
@@ -16,10 +16,11 @@
         </ul>
         <div class="card-body">
           <a href="#" class="btn btn-sm btn-success">Buy</a>
-          <a href="#" class="btn btn-sm btn-warning">Adopt</a>
+          <a href="{{url_for('pet_bp.adopt_pet', id = pet.id)}}" class="btn btn-sm btn-warning">Adopt</a>
         </div>
       </div>
     {%endfor%}
 </div>
 {%endblock main%}
+
 

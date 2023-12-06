@@ -1,4 +1,5 @@
 {%extends 'admin/admin_base.html'%}
+{%block title%}{{title}}{%endblock title%}
 {%block main%}
 
 <!-- /.row -->
@@ -33,15 +34,15 @@
       <div class="panel-heading">
         <div class="row">
           <div class="col-xs-3">
-            <i class="fa fa-tasks fa-5x"></i>
+            <i class="fa-solid fa-shield-dog fa-5x"></i>
           </div>
           <div class="col-xs-9 text-right">
-            <div class="huge">12</div>
-            <div>New Tasks!</div>
+            <div class="huge">{{context.total_pets}}</div>
+            <div>Total Pets</div>
           </div>
         </div>
       </div>
-      <a href="#">
+      <a href="{{url_for('admin_bp.see_all_pets')}}">
         <div class="panel-footer">
           <span class="pull-left">View Details</span>
           <span class="pull-right"
@@ -58,11 +59,11 @@
       <div class="panel-heading">
         <div class="row">
           <div class="col-xs-3">
-            <i class="fa fa-shopping-cart fa-5x"></i>
+            <i class="fa fa-shield-cat fa-5x"></i>
           </div>
           <div class="col-xs-9 text-right">
-            <div class="huge">124</div>
-            <div>New Orders!</div>
+            <div class="huge">{{context.adopted_pets}}</div>
+            <div>Adopted Pets</div>
           </div>
         </div>
       </div>

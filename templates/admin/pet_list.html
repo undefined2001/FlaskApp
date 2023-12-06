@@ -1,27 +1,29 @@
 {%extends 'admin/admin_base.html'%}
 {%block title%}{{title}}{%endblock title%}
 {%block main%}
-<h1 class="text-center"> User's List</h1>
+<h1 class="text-center">Pet's List</h1>
 <table class="table table-striped">
     <thead>
       <tr>
         <th scope="col">Count</th>
         <th scope="col">Name</th>
-        <th scope="col">Email</th>
-        <th scope="col">Phone</th>
+        <th scope="col">Species</th>
+        <th scope="col">Owner</th>
+        <th scope="col">Owner's Phone</th>
         <th scope="col">Modify</th>
       </tr>
     </thead>
     <tbody>
-        {%for user in users%}
+        {%for pet in pets%}
       <tr>
         <th scope="row">{{loop.index}}</th>
-        <td>{{user.name}}</td>
-        <td>{{user.email}}</td>
-        <td>{{user.phone}}</td>
+        <td>{{pet.name}}</td>
+        <td>{{pet.species}}</td>
+        <td>{{pet.owner.name}}</td>
+        <td>{{pet.owner.phone}}</td>
         <td>
             <!-- <a href="" class="btn btn-sm btn-warning">Update</a> -->
-            <a href="{{url_for('admin_bp.delete_user', user_id=user.id)}}" class="btn btn-sm btn-danger">Delete</a>
+            <a href="" class="btn btn-sm btn-danger">Delete</a>
         </td>
       </tr>
       {%endfor%}

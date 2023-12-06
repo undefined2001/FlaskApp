@@ -2,9 +2,28 @@
 {%block title%}{{title}}{%endblock title%}
 
 {%block main%}
-
-{% if user%}
-<h1>Hello {{user.name}} </h1>
+{%if is_loggedin%}
+<h3 class="text-center mt-2">All Pets</h3>
+<div class="container-fluid d-flex">
+    {%for pet in pets%}
+    <div class="card my-1 mx-3" style="width: 18rem;">
+        <img class="card-img-top" src="{{url_for('static', filename='media/' + pet.image)}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Name: {{pet.name}}</h5>
+          <p class="card-text"> Description: {{pet.description | truncate(150) }}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Species: {{pet.species}}</li>
+          <li class="list-group-item">Breed: {{pet.breed}}</li>
+          <li class="list-group-item">Breed: {{pet.age}}</li>
+        </ul>
+        <div class="card-body">
+          <a href="#" class="btn btn-sm btn-success">Buy</a>
+          <a href="{{url_for('pet_bp.adopt_pet', id = pet.id)}}" class="btn btn-sm btn-warning">Adopt</a>
+        </div>
+      </div>
+    {%endfor%}
+</div>
 {%else%}
 <h1>You are Not Logged in</h1>
 {%endif%}

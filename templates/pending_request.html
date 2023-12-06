@@ -1,0 +1,30 @@
+{%extends 'base.html' %}
+{%block title%}{{title}}{%endblock title%}
+{%block main%}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Count</th>
+      <th scope="col">PetName</th>
+      <th scope="col">OwnerName</th>
+      <th scope="col">Owner Number</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {%for request in requests %}
+    <tr>
+      <th scope="row">{{loop.index}}</th>
+      <td>{{request.pet.name}}</td>
+      <td>{{request.pet.owner.name}}</td>
+      <td>{{request.pet.owner.phone}}</td>
+      <td>
+        <a href="{{url_for('user_bp.approve_request', id=request.id)}}" class="btn btn-success btn-sm">Accept</a>
+        <a href="{{url_for('user_bp.decline_request', id=request.id)}}" class="btn btn-danger btn-sm">Deny</a>
+      </td>
+    </tr>
+    {%endfor%}
+  </tbody>
+</table>
+{%endblock main%}
+

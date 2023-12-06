@@ -7,11 +7,15 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>Startmin - Bootstrap Admin Theme</title>
+    <title>Petty Admin|{%block title%} {%endblock title%}</title>
 
     <!-- Bootstrap Core CSS -->
     <link
       href="{{url_for('static', filename='css/bootstrap.min.css')}}"
+      rel="stylesheet"
+    />
+    <link
+      href="{{url_for('static', filename='css/style.css')}}"
       rel="stylesheet"
     />
 
@@ -77,18 +81,18 @@
         <ul class="nav navbar-right navbar-top-links">
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-              <i class="fa fa-user fa-fw"></i> secondtruth <b class="caret"></b>
+              <i class="fa fa-user fa-fw"></i> {{admin_user_name}} <b class="caret"></b>
             </a>
             <ul class="dropdown-menu dropdown-user">
               <li>
                 <a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
               </li>
               <li>
-                <a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                <a href=""><i class="fa fa-gear fa-fw"></i> Settings</a>
               </li>
               <li class="divider"></li>
               <li>
-                <a href="{{url_for('logout')}}"
+                <a href="{{url_for('user_bp.logout')}}"
                   ><i class="fa fa-sign-out fa-fw"></i> Logout</a
                 >
               </li>
@@ -118,11 +122,17 @@
             </li>
             <li>
               <a href="{{url_for('admin_bp.admin_dashboard')}}" class="active"
-                ><i class="fa fa-dashboard fa-fw"></i> Dashboard</a
+                ><i class="fa fa-dashboard fa-fw fa-xl"></i> Dashboard</a
               >
             </li>
             <li>
-              <a href="#"><i class="fa fa-user fa-fw"></i> Users</a>
+              <a href="{{url_for('admin_bp.user_view_details')}}"><i class="fa fa-user fa-fw fa-xl"></i> Users</a>
+            </li>
+            <li>
+              <a href="{{url_for('admin_bp.see_all_pets')}}"> <i class="fa-solid fa-shield-dog fa-xl"></i></i> Pets</a>
+            </li>
+            <li>
+              <a href="{{url_for('admin_bp.history')}}"><i class="fa-solid fa-user-clock fa-xl"></i> History</a>
             </li>
           </ul>
         </div>

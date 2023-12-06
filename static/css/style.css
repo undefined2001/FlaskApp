@@ -6,3 +6,13 @@
     background-color: orange;
     border-radius: 5px;
 }
+
+.adopt-container{
+    margin-top: 10vh;
+}
+.adoption-history{
+    height: 5vh;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: rgba(200, 144, 39, 0.452);
+}
