@@ -54,7 +54,7 @@ def search_pet():
     if request.method == "POST":
         search_val = request.form.get("search_val")
         if search_val:
-            pets = db.session.query(Pet).filter(Pet.species.ilike(search_val)).all()
+            pets = db.session.query(Pet).filter(Pet.species.ilike(f"%{search_val}%")).all()
             return render_template("index.html", pets=pets, title="Searched Pet")
         
     return redirect(request.url)

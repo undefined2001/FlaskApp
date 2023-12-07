@@ -56,4 +56,8 @@ def delete_history(id):
     db.session.commit()
     return redirect(url_for('admin_bp.history'))
 
+@admin_bp.route('/see-adopted-pets')
+def see_adopted_pets():
+    pets = db.session.query(Adoption).filter_by(is_approved = True).all()
+    return render_template('admin/adopted_pet_list.html', pets = pets, title="All Pets")
 

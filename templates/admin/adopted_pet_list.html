@@ -1,0 +1,32 @@
+{%extends 'admin/admin_base.html'%}
+{%block title%}{{title}}{%endblock title%}
+{%block main%}
+<h1 class="text-center">Adopted Pet's List</h1>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Count</th>
+        <th scope="col">Name</th>
+        <th scope="col">Species</th>
+        <th scope="col">Owner</th>
+        <th scope="col">Owner's Phone</th>
+        <th scope="col">Modify</th>
+      </tr>
+    </thead>
+    <tbody>
+        {%for pet in pets%}
+      <tr>
+        <th scope="row">{{loop.index}}</th>
+        <td>{{pet.pet.name}}</td>
+        <td>{{pet.pet.species}}</td>
+        <td>{{pet.pet.owner.name}}</td>
+        <td>{{pet.pet.owner.phone}}</td>
+        <td>
+            <!-- <a href="" class="btn btn-sm btn-warning">Update</a> -->
+            <a href="" class="btn btn-sm btn-danger">Delete</a>
+        </td>
+      </tr>
+      {%endfor%}
+    </tbody>
+  </table>
+{%endblock main%}
