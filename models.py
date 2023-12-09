@@ -27,6 +27,7 @@ class User(db.Model):
     pet = relationship('Pet', backref='owner', lazy=True)
     buyer = relationship('History', backref='buyer', foreign_keys=[History.buyer_id], lazy=True)
     seller = relationship('History', backref='seller', foreign_keys=[History.seller_id], lazy=True)
+    buyer_c = relationship('Cart', backref='buyer', lazy=True)
 
     def set_password(self, password):
         hashpass = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
@@ -49,6 +50,7 @@ class Pet(db.Model):
     description = Column(Text, nullable=True)
     pet_a = relationship('Adoption', backref='pet', lazy=True)
     pet_h = relationship('History', backref='pet', lazy=True)
+    pet_c = relationship('Cart', backref='pet', lazy=True)
 
 class Adoption(db.Model):
     __tablename__ = 'adoptions'
@@ -58,6 +60,21 @@ class Adoption(db.Model):
     adopter_id = Column(ForeignKey('users.id'), nullable=False)
     is_approved = Column(Boolean, nullable=False, default=False)
     date = Column(DateTime, default=datetime.utcnow)
+
+class Cart(db.Model):
+    __tablename__ = 'carts'
+    id = Column(Integer, primary_key=True, nullable=False)
+    pet_id = Column(ForeignKey('pets.id'), nullable=False)
+    buyer_id = Column(ForeignKey('users.id'), nullable=False)
+
+    def total_price(self):
+        pets = db.session.query(Pet).filter_by(id=self.buyer_id).all()
+        total_price = 0
+        if pets:
+            for pet in pets:
+                total_price += pet.price
+        return total_price
+
 
 
 

@@ -1,0 +1,26 @@
+{%extends 'base.html' %}
+{%block main%}
+<div class="container">
+  {%for cart in carts%}
+  <div class="cart-box">
+    <div class="cart-item">
+      <img
+        class="cart-item-img"
+        src="{{url_for('static', filename='media/'+ cart.pet.image)}}"
+        alt=""
+      />
+      <div class="cart-item-info">
+        <h4>Name: {{cart.pet.name}}</h4>
+        <h4>Price: {{cart.pet.price}}Tk</h4>
+      </div>
+    </div>
+
+    <a href="{{url_for('cart_bp.remove_from_cart', id=cart.id)}}" class="btn btn-danger btn-sm">Remove</a>
+  </div>
+  {%endfor%}
+  <div>
+      <h3 class="my-3">Total: {{total_price}} Tk</h3>
+      <a href="" class="btn btn-success btn-md">Checkout</a>
+  </div>
+</div>
+{%endblock main%}

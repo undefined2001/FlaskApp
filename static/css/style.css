@@ -16,3 +16,33 @@
     border-radius: 5px;
     background-color: rgba(200, 144, 39, 0.452);
 }
+
+/* Cart Pages Design Goes Here */
+.cart-item{
+    display: flex;
+    align-items: center;
+    /* justify-content: space-evenly; */
+}
+.cart-box{
+    background-color: rgba(76, 246, 76, 0.133);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.cart-item-img{
+    display: inline-block;
+    height: 100px;
+    width: 100px;
+    padding: 5px;
+}
+
+.cart-item-info
+{
+    margin-left: 10px;
+}
+
+.cart-box a{
+    margin-right: 50px;
+}

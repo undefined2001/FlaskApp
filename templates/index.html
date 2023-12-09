@@ -18,9 +18,9 @@
           <li class="list-group-item">Age: {{pet.age}}</li>
           <li class="list-group-item">Price: {{pet.price}}Tk</li>
         </ul>
-        <div class="card-body">
-          <a href="#" class="btn btn-sm btn-success">Buy</a>
-          <a href="{{url_for('pet_bp.adopt_pet', id = pet.id)}}" class="btn btn-sm btn-warning">Adopt</a>
+        <div class="card-body ">
+          <a href="{{url_for('cart_bp.add_to_cart', id= pet.id)}}" class="btn btn-sm btn-success">Add to Cart</a>
+          <a href="{{url_for('pet_bp.adopt_pet', id = pet.id)}}" class="btn btn-sm btn-warning mx-1">Adopt</a>
         </div>
       </div>
     {%endfor%}

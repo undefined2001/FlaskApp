@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from models import Pet, User, db
-from blueprints import admin_bp, pet_bp, user_bp
+from blueprints import admin_bp, pet_bp, user_bp, cart_bp
 import os
 
 app = Flask(__name__)
@@ -15,6 +15,7 @@ app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif'}
 app.register_blueprint(admin_bp)
 app.register_blueprint(pet_bp)
 app.register_blueprint(user_bp)
+app.register_blueprint(cart_bp)
 
 db.init_app(app)
 
