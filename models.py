@@ -16,6 +16,15 @@ class History(db.Model):
     type = Column(String(10), nullable=False)
     date = Column(DateTime, nullable=False, default=datetime.utcnow)
 
+class BuyingHistory(db.Model):
+    __tablename__ = 'buying_history'
+    id = Column(Integer, primary_key=True, nullable=False)
+    total_amount = Column(Integer, nullable=False)
+    buyer = Column(ForeignKey('users.id'), nullable=False)
+    date = Column(DateTime, nullable=False, default=datetime.utcnow)
+
+    
+
 class User(db.Model):
     __tablename__ = 'users'
     id = Column(Integer, primary_key=True)
@@ -27,7 +36,8 @@ class User(db.Model):
     pet = relationship('Pet', backref='owner', lazy=True)
     buyer = relationship('History', backref='buyer', foreign_keys=[History.buyer_id], lazy=True)
     seller = relationship('History', backref='seller', foreign_keys=[History.seller_id], lazy=True)
-    buyer_c = relationship('Cart', backref='buyer', lazy=True)
+    buyer_bh = relationship("BuyingHistory", backref='hbuyer',foreign_keys=[BuyingHistory.buyer], lazy=True)
+    buyer_c = relationship('Cart', backref='buyer',  lazy=True)
 
     def set_password(self, password):
         hashpass = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
@@ -66,17 +76,9 @@ class Cart(db.Model):
     id = Column(Integer, primary_key=True, nullable=False)
     pet_id = Column(ForeignKey('pets.id'), nullable=False)
     buyer_id = Column(ForeignKey('users.id'), nullable=False)
-
-    def total_price(self):
-        pets = db.session.query(Pet).filter_by(id=self.buyer_id).all()
-        total_price = 0
-        if pets:
-            for pet in pets:
-                total_price += pet.price
-        return total_price
-
-
-
+    is_sold = Column(Boolean, default=False)
 
     
+
+
 

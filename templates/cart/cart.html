@@ -20,7 +20,7 @@
   {%endfor%}
   <div>
       <h3 class="my-3">Total: {{total_price}} Tk</h3>
-      <a href="" class="btn btn-success btn-md">Checkout</a>
+      <a href="{{url_for('cart_bp.checkout')}}" class="btn btn-success btn-md">Checkout</a>
   </div>
 </div>
 {%endblock main%}

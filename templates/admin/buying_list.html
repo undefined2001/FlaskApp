@@ -1,0 +1,35 @@
+{%extends 'admin/admin_base.html'%}
+{%block title%}{{title}}{%endblock title%}
+{%block main%}
+<div class="adopt-container">
+  <h1 class="text-center">History</h1>
+  <hr />
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Count</th>
+        <th scope="col">Buyer</th>
+        <th scope="col">Pet name</th>
+        <th scope="col">Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      {%for item in items%}
+      <tr>
+        <th scope="row">{{loop.index}}</th>
+        <td>{{item.buyer.name}}</td>
+        <td>{{item.pet.name}}</td>
+        <td>{{item.pet.price}}Tk</td>
+      </tr>
+      {%endfor%}
+      <tr>
+        <th scope="row"></th>
+        <td></td>
+        <td></td>
+        <td>Total: {{totalprice}}Tk</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+{%endblock main%}

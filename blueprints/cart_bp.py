@@ -1,5 +1,5 @@
 from flask import Blueprint, request, session, render_template, redirect, url_for
-from models import db, Pet, User, Cart
+from models import db, Pet, User, Cart, BuyingHistory
 
 cart_bp = Blueprint('cart_bp', __name__, template_folder="templates")
 
@@ -7,7 +7,7 @@ cart_bp = Blueprint('cart_bp', __name__, template_folder="templates")
 def view_cart():
     user_id = session.get("id")
     if user_id:
-        carts = db.session.query(Cart).filter_by(buyer_id = user_id).all()
+        carts = db.session.query(Cart).filter_by(buyer_id = user_id, is_sold=False).all()
         total_price = 0
         for cart in carts:
             total_price += cart.pet.price
@@ -42,3 +42,18 @@ def remove_from_cart(id):
     db.session.delete(cart)
     db.session.commit()
     return redirect(url_for('cart_bp.view_cart'))
+
+@cart_bp.route("/checkout")
+def checkout():
+    user = db.session.query(User).filter_by(id = session.get("id")).first()
+    items = db.session.query(Cart).filter_by(buyer_id = user.id).all()
+    for i in items:
+        i.is_sold = True
+        db.session.add(i)
+        db.session.commit()
+    total_price = sum([i.pet.price for i in items])
+    instance = BuyingHistory(buyer = user.id, total_amount= total_price)
+    db.session.add(instance)
+    db.session.commit()
+    return "<h1>Thanks For Buying From Us</h1>"
+    

@@ -1,0 +1,34 @@
+{%extends 'admin/admin_base.html'%}
+{%block title%}{{title}}{%endblock title%}
+{%block main%}
+<div class="adopt-container">
+  <h1 class="text-center">History</h1>
+  <hr />
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Count</th>
+        <th scope="col">Buyer</th>
+        <th scope="col">Date</th>
+        <th scope="col">Total Amount</th>
+        <th scope="col">Modify</th>
+      </tr>
+    </thead>
+    <tbody>
+      {%for history in histories%}
+      <tr>
+        <th scope="row">{{loop.index}}</th>
+        <td>{{history.hbuyer.name}}</td>
+        <td>{{history.date}}</td>
+        <td>{{history.total_amount}}Tk</td>
+        <td>
+          <a href="{{url_for('admin_bp.delete_buying_history', id=history.id)}}" class="btn btn-danger btn-sm">Delete</a>
+          <a href="{{url_for('admin_bp.see_buying_list', id=history.id)}}" class="btn btn-success btn-sm">Details</a>
+        </td>
+      </tr>
+      {%endfor%}
+    </tbody>
+  </table>
+</div>
+{%endblock main%}
